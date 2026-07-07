@@ -1,56 +1,12 @@
-import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { useRef } from "react";
 import trainerImg from "../assets/trainer.jpg";
 import { svgSelector } from "../utils/svgSelector";
-import { gsap } from "gsap";
 
 export default function Contacts() {
-  const lastTapRef = useRef(0);
-  const timeoutRef = useRef<number | null>(null);
   const whatsappLinkRef = useRef<HTMLAnchorElement | null>(null);
   const emailLinkRef = useRef<HTMLAnchorElement | null>(null);
   const brochureLinkRef = useRef<HTMLAnchorElement | null>(null);
-
-  function handleDoubleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    e.preventDefault();
-    console.log("Double-click detected!");
-    // Add your double-click logic here
-  }
-
-  useEffect(() => {
-    function handleTouchStart(e: TouchEvent) {
-      const now = Date.now();
-      const timeSinceLastTap = now - lastTapRef.current;
-
-      // Clear any previous single tap timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      if (timeSinceLastTap < 280 && timeSinceLastTap > 0) {
-        // Double tap detected
-        e.preventDefault();
-        console.log("Double-tap detected!");
-        // window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      } else {
-        // Single tap → prevent navigation
-        e.preventDefault();
-      }
-
-      lastTapRef.current = now;
-    }
-
-    const element = whatsappLinkRef.current;
-    if (element) {
-      element.addEventListener("touchstart", handleTouchStart, { passive: false });
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener("touchstart", handleTouchStart);
-      }
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
 
   return (
     <section aria-labelledby="contacts_title" className="contacts">
@@ -67,11 +23,15 @@ export default function Contacts() {
 
       <ul className="contacts_list">
         <li
-          onMouseEnter={() => {
+          onMouseEnter={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_first", { bottom: "0%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
           }}
-          onMouseLeave={() => {
+          onMouseLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_first", { bottom: "-50%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
           }}
@@ -83,7 +43,10 @@ export default function Contacts() {
             rel="noopener noreferrer"
             aria-label="Contattaci su WhatsApp"
             onClick={(e) => e.preventDefault()}
-            onDoubleClick={handleDoubleClick}
+            // onDoubleClick={handleDoubleClick}
+            onTouchStart={(e) => {
+              e.preventDefault();
+            }}
           >
             {svgSelector({
               svgName: "whatsapp",
@@ -100,11 +63,15 @@ export default function Contacts() {
         </li>
 
         <li
-          onMouseEnter={() => {
+          onMouseEnter={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_second", { bottom: "0%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
           }}
-          onMouseLeave={() => {
+          onMouseLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_second", { bottom: "-50%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
           }}
@@ -116,7 +83,10 @@ export default function Contacts() {
             rel="noopener noreferrer"
             aria-label="Contattaci via Email"
             onClick={(e) => e.preventDefault()}
-            onDoubleClick={handleDoubleClick}
+            // onDoubleClick={handleDoubleClick}
+            onTouchStart={(e) => {
+              e.preventDefault();
+            }}
           >
             {svgSelector({
               svgName: "email",
@@ -133,11 +103,15 @@ export default function Contacts() {
         </li>
 
         <li
-          onMouseEnter={() => {
+          onMouseEnter={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_third", { bottom: "0%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
           }}
-          onMouseLeave={() => {
+          onMouseLeave={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
             gsap.to(".text_third", { bottom: "-50%", duration: 0.3 });
             gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
           }}
@@ -149,7 +123,10 @@ export default function Contacts() {
             rel="noopener noreferrer"
             aria-label="Contattaci su WhatsApp"
             onClick={(e) => e.preventDefault()}
-            onDoubleClick={handleDoubleClick}
+            // onDoubleClick={handleDoubleClick}
+            onTouchStart={(e) => {
+              e.preventDefault();
+            }}
           >
             {svgSelector({
               svgName: "pdf",

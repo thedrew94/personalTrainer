@@ -1,41 +1,42 @@
 import { useEffect, useRef } from "react";
 import { svgSelector } from "../utils/svgSelector";
-import fitnessVideo from "../assets/fitness.mp4";
+import fitnessVideo from "../assets/fitnessCompressed.mp4";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
+    if (!video) return;
 
-    if (!video || !video.play) return;
+    // Force all the important properties
     video.muted = true;
+    video.loop = true;
     video.playsInline = true;
-    video.setAttribute("autoplay", "true");
-    video.setAttribute("loop", "true");
-    video.setAttribute("muted", "true");
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("tabindex", "-1");
-    video.setAttribute("aria-description", "Video background of a fitness instructor demonstrating exercises in a gym setting.");
-    video.setAttribute("aria-label", "Fitness instructor demonstrating exercises in a gym setting.");
+    video.autoplay = true;
+
+    // Accessibility (background video)
     video.setAttribute("role", "presentation");
     video.setAttribute("aria-hidden", "true");
+    video.setAttribute("tabindex", "-1");
 
     async function playVideo() {
       try {
         await video!.play();
       } catch (err) {
-        console.log("Autoplay prevented:", err);
+        console.warn("Autoplay prevented:", err);
       }
     }
 
-    playVideo();
+    const timeout = setTimeout(playVideo, 100);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
     <div className="hero">
       <div className="hero_bg_video">
-        <video ref={videoRef} className="hero_bg_video" autoPlay muted loop playsInline>
+        <video ref={videoRef} className="hero_bg_video" autoPlay muted loop playsInline preload="auto" poster="">
           <source src={fitnessVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>

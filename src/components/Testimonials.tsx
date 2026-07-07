@@ -1,7 +1,11 @@
-import trainer2Img from "../assets/trainer2.jpg";
-import trainer3Img from "../assets/trainer3.jpg";
+interface Props {
+  assets: Array<{ path: string; alt: string }>;
+}
 
-export default function Testimonials() {
+export default function Testimonials({ assets }: Props) {
+  const trainer2Img = assets[1].path;
+  const trainer3Img = assets[2].path;
+
   return (
     <section className="testimonials" aria-labelledby="testimonials_title">
       <picture draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} className="testimonials_img">

@@ -1,12 +1,13 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
-import trainerImg from "../assets/trainer.jpg";
-import trainer2Img from "../assets/trainer2.jpg";
-import trainer3Img from "../assets/trainer3.jpg";
+import { Fragment, useRef } from "react";
 
-export default function HorizontalPresentation() {
+interface Props {
+  assets: Array<{ path: string; alt: string }>;
+}
+
+export default function HorizontalPresentation({ assets }: Props) {
   const imgsContainerRef = useRef<HTMLDivElement>(null);
   const img1Ref = useRef<HTMLPictureElement>(null);
   const img2Ref = useRef<HTMLPictureElement>(null);
@@ -14,6 +15,18 @@ export default function HorizontalPresentation() {
   const wrapperOutRef = useRef<HTMLDivElement>(null);
   const wrapperInRef = useRef<HTMLDivElement>(null);
   const maskRef = useRef<SVGRectElement>(null);
+
+  const imagesElements = assets.map((asset, idx) => (
+    <picture
+      key={idx}
+      ref={idx === 0 ? img1Ref : idx === 1 ? img2Ref : idx === 2 ? img3Ref : null}
+      draggable="false"
+      onDragStart={(e) => e.preventDefault()}
+      onContextMenu={(e) => e.preventDefault()}
+    >
+      <img src={asset.path} alt={asset.alt} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+    </picture>
+  ));
 
   useGSAP(() => {
     if (!wrapperInRef.current || !wrapperOutRef.current || !maskRef.current || !imgsContainerRef.current) return;
@@ -201,23 +214,15 @@ export default function HorizontalPresentation() {
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
-  }, [wrapperInRef, wrapperOutRef, maskRef, imgsContainerRef, img1Ref, img2Ref]);
+  }, [wrapperInRef, wrapperOutRef, maskRef, imgsContainerRef, img1Ref, img2Ref, img3Ref]);
 
   return (
     <div ref={wrapperOutRef} className="horizontal_wrapper_out">
       <span className="sections_bg_text">CROSSFIT HYROX PERSONAL TRAINER CROSSFIT HYROX PERSONAL TRAINER CROSSFIT HYROX PERSONAL TRAINER</span>
       <div ref={imgsContainerRef} className="horizontal_wrapper_out_img">
-        <picture ref={img1Ref} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}>
-          <img src={trainerImg} alt="Fitness" title="Fitness trainer man" draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
-        </picture>
-
-        <picture ref={img2Ref} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}>
-          <img src={trainer2Img} alt="Fitness" title="Fitness trainer man" draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
-        </picture>
-
-        <picture ref={img3Ref} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}>
-          <img src={trainer3Img} alt="Fitness" title="Fitness trainer man" draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
-        </picture>
+        {imagesElements.map((imageElement, idx) => (
+          <Fragment key={idx}>{imageElement}</Fragment>
+        ))}
       </div>
       <div ref={wrapperInRef} className="horizontal_wrapper_in">
         <svg viewBox="0 0 900 10" fill="none" xmlns="http://www.w3.org/2000/svg">

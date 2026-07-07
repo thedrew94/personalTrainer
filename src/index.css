@@ -455,7 +455,7 @@ img:not([src]) {
   position: absolute;
   top: 8%;
   left: 10vw;
-  width: 50vw;
+  width: 60vw;
 }
 
 .horizontal_wrapper_in svg .mask {
@@ -932,7 +932,7 @@ img:not([src]) {
 
 .bg_text_selection {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   bottom: -50%;
   right: 0;
   display: inline-block;
@@ -1035,6 +1035,7 @@ img:not([src]) {
 
   .hero_vertical h2 {
     font-size: 7.5rem;
+    font-size: clamp(2vh, 6.5rem, 8vh);
   }
 
   .hero_info {
@@ -1104,9 +1105,9 @@ img:not([src]) {
 
   .horizontal_wrapper_in svg {
     position: absolute;
-    top: 8%;
+    top: 5%;
     left: 10vw;
-    width: 50vw;
+    width: 80vw;
   }
 
   .inner_section {
@@ -1116,7 +1117,7 @@ img:not([src]) {
 
   .inner_section_empty_content {
     width: 100%;
-    height: 80%;
+    height: 70%;
   }
 
   .inner_section span {
@@ -1165,9 +1166,8 @@ img:not([src]) {
     gap: 0px;
     width: 100%;
     min-height: 600px;
-    height: 100dvh;
-    max-height: 100dvh;
-
+    height: 100vh;
+    max-height: 100vh;
     padding: 20px 10px;
     background-color: #fff;
     overflow: hidden;
@@ -1191,6 +1191,10 @@ img:not([src]) {
 
   .testimonials_title {
     font-size: clamp(5rem, 13dvw, 9rem);
+  }
+
+  .testimonials_subtitle {
+    font-size: 1.4rem;
   }
 
   .testimonials_content {
@@ -1237,17 +1241,17 @@ img:not([src]) {
   }
 
   .testimonials_navigation button {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 
   .testimonials_pagination button {
-    padding: 8px;
+    padding: 5px;
   }
 
   .contacts {
     justify-content: space-between;
     gap: 0px;
-    padding: 10px;
+    padding: 0px;
   }
 
   .contacts_img::after {
@@ -1263,11 +1267,15 @@ img:not([src]) {
 
   .contacts_title_container {
     gap: 10px;
-    padding: 0px;
+    padding: 10px;
   }
 
   .contacts_title {
     font-size: clamp(5rem, 13dvw, 9rem);
+  }
+
+  .contacts_subtitle {
+    font-size: 1.4rem;
   }
 
   .contacts_list {
@@ -1283,7 +1291,15 @@ img:not([src]) {
   }
 
   .contacts_list li a {
-    gap: 40px;
+    gap: 22px;
+  }
+
+  .contacts_list li a svg {
+    --svg-size: 26px;
+    width: var(--svg-size) !important;
+    min-width: var(--svg-size) !important;
+    height: var(--svg-size) !important;
+    min-height: var(--svg-size) !important;
   }
 
   .contacts_list_text h6 {
@@ -1296,7 +1312,7 @@ img:not([src]) {
 
   .bg_text_selection {
     position: absolute;
-    z-index: 1;
+    z-index: -1;
     bottom: -50%;
     right: 0;
     display: inline-block;
