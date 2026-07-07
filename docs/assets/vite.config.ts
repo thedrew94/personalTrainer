@@ -9,4 +9,6 @@ export default defineConfig({
     strictPort: true,
     open: true,
   },
+
+  base: "./",
 });
