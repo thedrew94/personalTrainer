@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { svgSelector } from "../utils/svgSelector";
+import videoPoster from "../assets/videoPoster.png";
 import fitnessVideo from "../assets/fitnessCompressed.mp4";
 
 export default function Hero() {
@@ -36,7 +37,7 @@ export default function Hero() {
   return (
     <div className="hero">
       <div className="hero_bg_video">
-        <video ref={videoRef} className="hero_bg_video" autoPlay muted loop playsInline preload="auto" poster="">
+        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster={videoPoster}>
           <source src={fitnessVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>

@@ -70,6 +70,7 @@
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  background: #fff;
   /* THIS WILL ALLOW US TO USE rem SIZING EASILY. 1rem = 10px / 1.74rem = 17.4px */
   font-size: 62.5%;
   font-family: sans-serif;
@@ -82,6 +83,7 @@ html {
 }
 
 body {
+  background: #fff;
   overflow-x: hidden;
 }
 
@@ -128,6 +130,17 @@ img:not([src]) {
   object-position: center;
   object-fit: cover;
   overflow: hidden;
+}
+
+.hero_bg_video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  object-position: center center;
 }
 
 .hero_bg_video::before {
@@ -1342,57 +1355,16 @@ img:not([src]) {
     bottom: 8%;
   }
 
-  .footer {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background-color: #252525;
-    color: #fff;
-  }
-
   .footer::before {
-    position: absolute;
-    content: "";
-    z-index: 1;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgb(37, 37, 37) 0%, rgb(37, 37, 37, 0) 100%);
-    user-select: none;
-    pointer-events: none;
+    top: -200%;
+    height: 200%;
   }
 
   .footer small {
-    font-family: "CustomFont", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    text-align: center;
-    font-size: 1.6rem;
-    line-height: 100%;
+    font-size: 1.4rem;
   }
 
   .footer a {
-    font-size: 1.6rem;
-    line-height: 150%;
-    font-weight: normal;
-    text-decoration: none;
-    text-align: center;
-    color: #fff;
-    transition: all 0.25s;
+    font-size: 1.4rem;
   }
-
-  .footer a:hover {
-    text-decoration: underline;
-  }
-}
-
-/* MOBILE BREAKING POIN ON LANDSCAPE ORIENTATION */
-@media (max-width: 767px) and (orientation: landscape) {
 }
