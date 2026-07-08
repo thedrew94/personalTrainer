@@ -24,7 +24,7 @@ export default function HorizontalPresentation({ assets }: Props) {
       onDragStart={(e) => e.preventDefault()}
       onContextMenu={(e) => e.preventDefault()}
     >
-      <img src={asset.path} alt={asset.alt} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+      <img src={asset.path} alt={asset.alt} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} loading="eager" />
     </picture>
   ));
 

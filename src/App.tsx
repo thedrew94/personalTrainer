@@ -4,9 +4,9 @@ import Hero from "./components/Hero";
 import HorizontalPresentation from "./components/HorizontalPresentation";
 import Testimonials from "./components/Testimonials";
 
-import trainerImg from "./assets/trainer.jpg";
-import trainerImg2 from "./assets/trainer2.jpg";
-import trainerImg3 from "./assets/trainer3.jpg";
+import trainerImg from "./assets/trainerCompressed.jpg";
+import trainerImg2 from "./assets/trainer2Compressed.jpg";
+import trainerImg3 from "./assets/trainer3Compressed.jpg";
 
 const assets = [
   {

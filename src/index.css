@@ -1165,7 +1165,7 @@ img:not([src]) {
     align-items: flex-end;
     gap: 0px;
     width: 100%;
-    min-height: 600px;
+    min-height: 100vh;
     height: 100vh;
     max-height: 100vh;
     padding: 20px 10px;

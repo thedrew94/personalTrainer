@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { useRef } from "react";
-import trainerImg from "../assets/trainer.jpg";
+import trainerImg from "../assets/trainerCompressed.jpg";
 import { svgSelector } from "../utils/svgSelector";
 
 export default function Contacts() {
