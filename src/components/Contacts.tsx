@@ -9,7 +9,7 @@ export default function Contacts() {
   const brochureLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   return (
-    <section aria-labelledby="contacts_title" className="contacts">
+    <section aria-labelledby="contacts_title" className="contacts" id="contacts">
       <picture draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} className="contacts_img">
         <img src={trainerImg} alt="Fitness" title="Fitness trainer man" draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
       </picture>

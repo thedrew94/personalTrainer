@@ -105,6 +105,74 @@ img:not([src]) {
 @media (hover: none) {
 }
 
+.global_loader {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  background: #f0f0f0;
+}
+
+.global_loader.fade_out {
+  animation: fadeOutLoader 1.25s ease-out forwards;
+}
+
+@keyframes fadeOutLoader {
+  0% {
+    opacity: 1;
+  }
+  99.9999% {
+    opacity: 0;
+  }
+  100% {
+    z-index: -3;
+    opacity: 0;
+    visibility: hidden;
+    user-select: none;
+    pointer-events: none;
+    display: none;
+  }
+}
+
+.loader_percentage {
+  font-family: "CustomFont", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16rem;
+  line-height: 100%;
+  color: #252525;
+}
+
+.loader_outer {
+  position: relative;
+  width: calc(100% - 6px);
+  height: 30px;
+  margin: 3px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.loader_inner {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 1%;
+  height: 100%;
+  border-radius: 3px;
+  background-color: #252525;
+  transition: all 0.25s ease-out;
+}
+
 .hero {
   position: fixed;
   z-index: -1;
@@ -246,9 +314,9 @@ img:not([src]) {
   left: 0;
   width: 200%;
   height: 100%;
-  opacity: 0.25;
+  opacity: 0.5;
   /* background-color: rgb(255, 255, 255); */
-  background-color: rgb(154, 40, 40);
+  background-color: rgb(154, 146, 40);
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
 
@@ -281,6 +349,7 @@ img:not([src]) {
   font-size: 1.6rem;
   font-weight: normal;
   line-height: 100%;
+  text-transform: uppercase;
   color: #fff;
   cursor: pointer;
 }
@@ -1075,7 +1144,7 @@ img:not([src]) {
     width: 125%;
     height: 150%;
     opacity: 0.35;
-    background-color: rgb(154, 40, 40);
+    /* background-color: rgb(154, 40, 40); */
     clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
     transform: translateY(-50%);
   }

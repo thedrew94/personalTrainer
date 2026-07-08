@@ -7,6 +7,7 @@ import Testimonials from "./components/Testimonials";
 import trainerImg2 from "./assets/trainer2Compressed.jpg";
 import trainerImg3 from "./assets/trainer3Compressed.jpg";
 import trainerImg from "./assets/trainerCompressed.jpg";
+import GlobalLoader from "./components/GlobalLoader";
 
 const assets = [
   {
@@ -26,6 +27,7 @@ const assets = [
 export default function App() {
   return (
     <>
+      <GlobalLoader />
       <Hero />
       <HorizontalPresentation assets={assets} />
       <Testimonials assets={assets} />

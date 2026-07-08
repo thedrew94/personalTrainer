@@ -55,7 +55,17 @@ export default function Hero() {
               Nemo, adipisci dicta tempora deleniti quo aperiam neque corrupti minima nihil sapiente atque tenetur dignissimos, nulla necessitatibus molestiae?
             </h4>
 
-            <button className="hero_info_button">CONTACT ME {svgSelector({ svgName: "arrow", svgWidth: "24", svgHeight: "24", svgFill: "#fff" })}</button>
+            <button
+              className="hero_info_button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const contactsSection = document.getElementById("contacts");
+                if (contactsSection) contactsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
+              CONTATTA {svgSelector({ svgName: "arrow", svgWidth: "24", svgHeight: "24", svgFill: "#fff" })}
+            </button>
           </div>
         </div>
         <span className="hero_name">
