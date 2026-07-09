@@ -142,6 +142,12 @@ img:not([src]) {
 }
 
 .loader_percentage {
+  min-width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   font-family: "CustomFont", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -150,6 +156,18 @@ img:not([src]) {
   font-size: 16rem;
   line-height: 100%;
   color: #252525;
+}
+
+.loader_percentage span {
+  flex: 1;
+}
+
+.loader_percentage span:nth-child(1) {
+  text-align: right;
+}
+
+.loader_percentage span:nth-child(2) {
+  text-align: left;
 }
 
 .loader_outer {
@@ -171,6 +189,19 @@ img:not([src]) {
   border-radius: 3px;
   background-color: #252525;
   transition: all 0.25s ease-out;
+}
+
+.app_wrapper.loading {
+  min-width: 0;
+  width: 0;
+  min-height: 0;
+  height: 0;
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .hero {

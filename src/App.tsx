@@ -4,35 +4,57 @@ import Hero from "./components/Hero";
 import HorizontalPresentation from "./components/HorizontalPresentation";
 import Testimonials from "./components/Testimonials";
 
+import fitnessVideo from "./assets/fitnessCompressed.mp4";
 import trainerImg2 from "./assets/trainer2Compressed.jpg";
 import trainerImg3 from "./assets/trainer3Compressed.jpg";
 import trainerImg from "./assets/trainerCompressed.jpg";
-import GlobalLoader from "./components/GlobalLoader";
+import videoPoster from "./assets/videoPoster.png";
 
-const assets = [
+import { useState } from "react";
+import GlobalLoader from "./components/GlobalLoader";
+import type { AssetInterface } from "./types/interfaces";
+
+const assets: Array<AssetInterface> = [
   {
+    type: "image",
     path: trainerImg,
     alt: "Trainer 1",
   },
   {
+    type: "image",
     path: trainerImg2,
     alt: "Trainer 2",
   },
   {
+    type: "image",
     path: trainerImg3,
     alt: "Trainer 3",
+  },
+  {
+    type: "image",
+    path: videoPoster,
+    alt: "Video Poster",
+  },
+  {
+    type: "video",
+    path: fitnessVideo,
+    alt: "Fitness Video",
   },
 ];
 
 export default function App() {
+  const [appLoading, setAppLoading] = useState(true);
+
   return (
     <>
-      <GlobalLoader />
-      <Hero />
-      <HorizontalPresentation assets={assets} />
-      <Testimonials assets={assets} />
-      <Contacts />
-      <Footer />
+      <GlobalLoader assets={assets} setAppLoading={setAppLoading} />
+      <div className={`app_wrapper ${appLoading ? "loading" : ""}`}>
+        <Hero assets={assets} />
+        <HorizontalPresentation assets={assets} />
+        <Testimonials assets={assets} />
+        <Contacts />
+        <Footer />
+      </div>
     </>
   );
 }

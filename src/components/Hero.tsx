@@ -1,10 +1,15 @@
 import { useEffect, useRef } from "react";
+import type { AssetInterface } from "../types/interfaces";
 import { svgSelector } from "../utils/svgSelector";
-import videoPoster from "../assets/videoPoster.png";
-import fitnessVideo from "../assets/fitnessCompressed.mp4";
 
-export default function Hero() {
+interface Props {
+  assets: Array<AssetInterface>;
+}
+
+export default function Hero({ assets }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoPoster = assets.find((asset) => asset.type === "image" && asset.alt === "Video Poster")?.path;
+  const fitnessVideo = assets.find((asset) => asset.type === "video" && asset.alt === "Fitness Video")?.path;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -16,11 +21,6 @@ export default function Hero() {
     video.playsInline = true;
     video.autoplay = true;
 
-    // Accessibility (background video)
-    video.setAttribute("role", "presentation");
-    video.setAttribute("aria-hidden", "true");
-    video.setAttribute("tabindex", "-1");
-
     async function playVideo() {
       try {
         await video!.play();
@@ -29,7 +29,7 @@ export default function Hero() {
       }
     }
 
-    const timeout = setTimeout(playVideo, 100);
+    const timeout = setTimeout(playVideo, 150);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -37,7 +37,7 @@ export default function Hero() {
   return (
     <div className="hero">
       <div className="hero_bg_video">
-        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster={videoPoster}>
+        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" poster={videoPoster} aria-hidden="true" role="presentation" tabIndex={-1}>
           <source src={fitnessVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
