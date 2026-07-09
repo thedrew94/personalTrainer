@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import type { AssetInterface } from "../types/interfaces";
 
 interface Props {
@@ -7,97 +7,53 @@ interface Props {
 }
 
 export default function GlobalLoader({ assets, setAppLoading }: Props) {
-  const [displayedProgress, setDisplayedProgress] = useState(0);
-  const [targetProgress, setTargetProgress] = useState(0);
-  const animationRef = useRef<number | null>(null);
+  const [displayedProgress, setDisplayedProgress] = useState<number>(1);
 
   useEffect(() => {
-    let loadedCount = 0;
-    const totalAssets = assets.length;
+    const interval = setInterval(() => {
+      setDisplayedProgress((prev) => {
+        if (prev === 100) {
+          clearInterval(interval);
+          setAppLoading(false);
+          return 100;
+        }
+        return prev === 99 ? 99 : prev + 1;
+      });
+    }, 40);
+    return () => clearInterval(interval);
+  }, []);
 
-    const preloadAssets = () => {
+  useEffect(() => {
+    // load assets, once fully loaded, set displayedProgress to 100
+    function preloadAssets() {
+      const totalAssets = assets.length;
+      let loadedCount = 0;
+
       assets.forEach(({ type, path }) => {
         if (type === "image") {
           const img = new Image();
           img.src = path;
-
           img.onload = () => {
             loadedCount++;
-            const newProgress = Math.round((loadedCount / totalAssets) * 100);
-            setTargetProgress(newProgress);
-          };
-
-          img.onerror = () => {
-            console.warn(`Failed to load asset: ${path}`);
-            loadedCount++;
-            const newProgress = Math.round((loadedCount / totalAssets) * 100);
-            setTargetProgress(newProgress);
+            if (loadedCount === totalAssets) {
+              setDisplayedProgress(100);
+            }
           };
         } else if (type === "video") {
           const video = document.createElement("video");
           video.src = path;
           video.preload = "auto";
-
           video.onloadeddata = () => {
             loadedCount++;
-            const newProgress = Math.round((loadedCount / totalAssets) * 100);
-            setTargetProgress(newProgress);
-          };
-
-          video.onerror = () => {
-            console.warn(`Failed to load asset: ${path}`);
-            loadedCount++;
-            const newProgress = Math.round((loadedCount / totalAssets) * 100);
-            setTargetProgress(newProgress);
+            if (loadedCount === totalAssets) {
+              setDisplayedProgress(100);
+            }
           };
         }
       });
-    };
-
-    if (totalAssets > 0) {
-      preloadAssets();
-    } else {
-      setTargetProgress(100);
     }
+    preloadAssets();
   }, [assets]);
-
-  // Smooth animation from displayedProgress → targetProgress
-  useEffect(() => {
-    if (displayedProgress === targetProgress) return;
-
-    const animate = () => {
-      setDisplayedProgress((prev) => {
-        const diff = targetProgress - prev;
-        const increment = Math.max(1, Math.floor(diff / 8)); // Smooth speed
-
-        if (Math.abs(diff) <= 1) {
-          return targetProgress;
-        }
-        return prev + increment;
-      });
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [targetProgress]);
-
-  // Final callback when loading is complete
-  useEffect(() => {
-    if (targetProgress === 100 && displayedProgress === 100) {
-      const timer = setTimeout(() => {
-        setAppLoading(false);
-      }, 600); // Small delay for nice finish
-
-      return () => clearTimeout(timer);
-    }
-  }, [targetProgress, displayedProgress, setAppLoading]);
 
   return (
     <div className={`global_loader ${displayedProgress === 100 ? "fade_out" : ""}`}>
@@ -106,7 +62,7 @@ export default function GlobalLoader({ assets, setAppLoading }: Props) {
         <span>%</span>
       </div>
       <div className="loader_outer">
-        <span className="loader_inner" style={{ width: `${targetProgress}%` }} />
+        <span className="loader_inner" style={{ width: `${displayedProgress}%` }} />
       </div>
     </div>
   );

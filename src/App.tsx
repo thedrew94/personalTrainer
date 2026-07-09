@@ -48,13 +48,16 @@ export default function App() {
   return (
     <>
       <GlobalLoader assets={assets} setAppLoading={setAppLoading} />
-      <div className={`app_wrapper ${appLoading ? "loading" : ""}`}>
-        <Hero assets={assets} />
-        <HorizontalPresentation assets={assets} />
-        <Testimonials assets={assets} />
-        <Contacts />
-        <Footer />
-      </div>
+
+      {!appLoading && (
+        <>
+          <Hero assets={assets} />
+          <HorizontalPresentation assets={assets} />
+          <Testimonials assets={assets} />
+          <Contacts />
+          <Footer />
+        </>
+      )}
     </>
   );
 }
