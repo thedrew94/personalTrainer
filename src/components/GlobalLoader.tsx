@@ -24,6 +24,16 @@ export default function GlobalLoader({ assets, setAppLoading }: Props) {
   }, []);
 
   useEffect(() => {
+    // if the loading time exceeds 6 seconds, set displayedProgress to 100
+    if (displayedProgress < 100) {
+      const timeout = setTimeout(() => {
+        setDisplayedProgress(100);
+      }, 6000);
+      return () => clearTimeout(timeout);
+    }
+  }, [displayedProgress]);
+
+  useEffect(() => {
     // load assets, once fully loaded, set displayedProgress to 100
     function preloadAssets() {
       const totalAssets = assets.length;
