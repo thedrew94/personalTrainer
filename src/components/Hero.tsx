@@ -48,8 +48,7 @@ export default function Hero({ assets }: Props) {
           <div className="hero_info_text">
             <h3>ISTRUTTORE FITNESS</h3>
             <h4>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quo ducimus quidem nostrum accusantium, sint doloribus nobis quasi repellat praesentium aperiam
-              cupiditate alias deserunt recusandae debitis officiis quis aspernatur repellendus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam non quos vero.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quo ducimus quidem nostrum accusantium, sint doloribus
               <br />
               <br />
               Nemo, adipisci dicta tempora deleniti quo aperiam neque corrupti minima nihil sapiente atque tenetur dignissimos, nulla necessitatibus molestiae?

@@ -6,7 +6,35 @@ import { svgSelector } from "../utils/svgSelector";
 export default function Contacts() {
   const whatsappLinkRef = useRef<HTMLAnchorElement | null>(null);
   const emailLinkRef = useRef<HTMLAnchorElement | null>(null);
-  const brochureLinkRef = useRef<HTMLAnchorElement | null>(null);
+  const mapRef = useRef<HTMLAnchorElement | null>(null);
+
+  function handleMouseEnter(textClass: string) {
+    let mediaQueryResize = gsap.matchMedia();
+
+    mediaQueryResize.add("(min-width: 768px)", () => {
+      gsap.to(`.${textClass}`, { bottom: "0%", duration: 0.3 });
+      gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
+    });
+
+    mediaQueryResize.add("(max-width: 767px)", () => {
+      gsap.to(`.${textClass}`, { bottom: "0%", duration: 0.3 });
+      gsap.to(".text_default", { bottom: "-100%", duration: 0.3 });
+    });
+  }
+
+  function handleMouseLeave(textClass: string) {
+    let mediaQueryResize = gsap.matchMedia();
+
+    mediaQueryResize.add("(min-width: 768px)", () => {
+      gsap.to(`.${textClass}`, { bottom: "-50%", duration: 0.3 });
+      gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
+    });
+
+    mediaQueryResize.add("(max-width: 767px)", () => {
+      gsap.to(`.${textClass}`, { bottom: "-150%", duration: 0.3 });
+      gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
+    });
+  }
 
   return (
     <section aria-labelledby="contacts_title" className="contacts" id="contacts">
@@ -26,14 +54,12 @@ export default function Contacts() {
           onMouseEnter={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_first", { bottom: "0%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
+            handleMouseEnter("text_first");
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_first", { bottom: "-50%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
+            handleMouseLeave("text_first");
           }}
         >
           <a
@@ -42,10 +68,9 @@ export default function Contacts() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contattaci su WhatsApp"
-            onClick={(e) => e.preventDefault()}
-            // onDoubleClick={handleDoubleClick}
-            onTouchStart={(e) => {
+            onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
             }}
           >
             {svgSelector({
@@ -66,14 +91,12 @@ export default function Contacts() {
           onMouseEnter={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_second", { bottom: "0%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
+            handleMouseEnter("text_second");
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_second", { bottom: "-50%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
+            handleMouseLeave("text_second");
           }}
         >
           <a
@@ -82,10 +105,9 @@ export default function Contacts() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contattaci via Email"
-            onClick={(e) => e.preventDefault()}
-            // onDoubleClick={handleDoubleClick}
-            onTouchStart={(e) => {
+            onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
             }}
           >
             {svgSelector({
@@ -106,38 +128,35 @@ export default function Contacts() {
           onMouseEnter={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_third", { bottom: "0%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "-50%", duration: 0.3 });
+            handleMouseEnter("text_third");
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            gsap.to(".text_third", { bottom: "-50%", duration: 0.3 });
-            gsap.to(".text_default", { bottom: "0%", duration: 0.3 });
+            handleMouseLeave("text_third");
           }}
         >
           <a
-            ref={brochureLinkRef}
-            href="https://wa.me/XXXXXXXXXX"
+            ref={mapRef}
+            href="https://www.google.com/maps"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contattaci su WhatsApp"
-            onClick={(e) => e.preventDefault()}
-            // onDoubleClick={handleDoubleClick}
-            onTouchStart={(e) => {
+            aria-label="Contattaci sulla mappa"
+            onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
             }}
           >
             {svgSelector({
-              svgName: "pdf",
+              svgName: "map",
               svgWidth: "34px",
               svgHeight: "34px",
               svgFill: "#252525",
             })}
             <span className="divider"></span>
             <div className="contacts_list_text">
-              <h6>Social</h6>
-              <h5>Brochure</h5>
+              <h6>Area</h6>
+              <h5>Mappa</h5>
             </div>
           </a>
         </li>
@@ -153,7 +172,7 @@ export default function Contacts() {
         EMAIL
       </span>
       <span className="bg_text_selection text_third" aria-disabled="true" aria-hidden="true">
-        BROCHURE
+        MAPPA
       </span>
     </section>
   );

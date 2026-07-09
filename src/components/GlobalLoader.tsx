@@ -6,64 +6,32 @@ interface Props {
   setAppLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function GlobalLoader({ assets, setAppLoading }: Props) {
+export default function GlobalLoader({ setAppLoading }: Props) {
   const [displayedProgress, setDisplayedProgress] = useState<number>(1);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDisplayedProgress((prev) => {
-        if (prev === 100) {
-          clearInterval(interval);
+    const duration = 500;
+    const startTime = Date.now();
+
+    function animate() {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(Math.floor((elapsed / duration) * 100), 100);
+
+      setDisplayedProgress(Math.max(1, progress));
+
+      if (progress < 100) {
+        requestAnimationFrame(animate);
+      } else {
+        setTimeout(() => {
           setAppLoading(false);
-          return 100;
-        }
-        return prev === 99 ? 99 : prev + 1;
-      });
-    }, 40);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    // if the loading time exceeds 6 seconds, set displayedProgress to 100
-    if (displayedProgress < 100) {
-      const timeout = setTimeout(() => {
-        setDisplayedProgress(100);
-      }, 6000);
-      return () => clearTimeout(timeout);
+        }, 300);
+      }
     }
-  }, [displayedProgress]);
 
-  useEffect(() => {
-    // load assets, once fully loaded, set displayedProgress to 100
-    function preloadAssets() {
-      const totalAssets = assets.length;
-      let loadedCount = 0;
+    const rafId = requestAnimationFrame(animate);
 
-      assets.forEach(({ type, path }) => {
-        if (type === "image") {
-          const img = new Image();
-          img.src = path;
-          img.onload = () => {
-            loadedCount++;
-            if (loadedCount === totalAssets) {
-              setDisplayedProgress(100);
-            }
-          };
-        } else if (type === "video") {
-          const video = document.createElement("video");
-          video.src = path;
-          video.preload = "auto";
-          video.onloadeddata = () => {
-            loadedCount++;
-            if (loadedCount === totalAssets) {
-              setDisplayedProgress(100);
-            }
-          };
-        }
-      });
-    }
-    preloadAssets();
-  }, [assets]);
+    return () => cancelAnimationFrame(rafId);
+  }, [setAppLoading]);
 
   return (
     <div className={`global_loader ${displayedProgress === 100 ? "fade_out" : ""}`}>

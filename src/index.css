@@ -771,8 +771,19 @@ img:not([src]) {
 
 .testimonials_content_img.active {
   z-index: 2;
-  opacity: 1;
   transition: all 0.75s ease-out;
+  animation: appearIn 0.75s ease-out forwards;
+}
+
+@keyframes appearIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%) scale(1);
+  }
 }
 
 .testimonials_content_img img {
@@ -1000,21 +1011,23 @@ img:not([src]) {
   transition: all 0.25s ease-out;
 }
 
-.contacts_list li:hover {
-  color: #fff;
-}
+@media (hover: hover) {
+  .contacts_list li:hover {
+    color: #fff;
+  }
 
-.contacts_list li:hover::before {
-  opacity: 1;
-  left: 0%;
-}
+  .contacts_list li:hover::before {
+    opacity: 1;
+    left: 0%;
+  }
 
-.contacts_list li:hover svg path {
-  fill: #fff;
-}
+  .contacts_list li:hover svg path {
+    fill: #fff;
+  }
 
-.contacts_list li:hover span {
-  border: 1px solid #fff;
+  .contacts_list li:hover span {
+    border: 1px solid #fff;
+  }
 }
 
 .contacts_list li a {
@@ -1437,11 +1450,11 @@ img:not([src]) {
   .bg_text_selection {
     position: absolute;
     z-index: -1;
-    bottom: -50%;
+    bottom: -150%;
     right: 0;
     display: inline-block;
     opacity: 0.85;
-    font-size: 14rem;
+    font-size: 8rem;
     font-weight: bold;
     line-height: 100%;
     text-transform: uppercase;
@@ -1452,11 +1465,9 @@ img:not([src]) {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     white-space: nowrap;
-    display: none;
   }
 
   .bg_text_selection.text_default {
-    display: inline-block;
     bottom: 8%;
   }
 
