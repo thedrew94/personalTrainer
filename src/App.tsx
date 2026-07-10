@@ -12,6 +12,7 @@ import videoPoster from "./assets/videoPoster.png";
 
 import { useState } from "react";
 import GlobalLoader from "./components/GlobalLoader";
+import Menu from "./components/Menu";
 import type { AssetInterface } from "./types/interfaces";
 
 const assets: Array<AssetInterface> = [
@@ -31,7 +32,7 @@ const assets: Array<AssetInterface> = [
     alt: "Trainer 3",
   },
   {
-    type: "image",
+    type: "poster",
     path: videoPoster,
     alt: "Video Poster",
   },
@@ -47,10 +48,11 @@ export default function App() {
 
   return (
     <>
-      <GlobalLoader assets={assets} setAppLoading={setAppLoading} />
+      <GlobalLoader appLoading={appLoading} setAppLoading={setAppLoading} />
 
       {!appLoading && (
         <>
+          <Menu />
           <Hero assets={assets} />
           <HorizontalPresentation assets={assets} />
           <Testimonials assets={assets} />

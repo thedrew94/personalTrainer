@@ -17,24 +17,24 @@ export default function Testimonials({ assets }: Props) {
       imgAlt: assets[0].alt,
       imgTitle: "Trainer 1",
       bodyContent:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius consequatur rerum commodi neque perspiciatis accusantium distinctio voluptates autem consectetur tenetur rem officia odit pariatur, molestiae laboriosam natus consequuntur ullam accusamus.",
-      author: "Trainer 1",
+        "I had been stuck in a rut for years — no energy, inconsistent workouts, and zero progress. Working with this trainer completely changed my life. He created a plan that fit my busy schedule and my goals perfectly. In just 4 months I lost 28 lbs, built real strength, and finally feel confident again. Best investment I've ever made in myself!",
+      author: "Andrea Rossi",
     },
     {
       imgPath: assets[1].path,
-      imgAlt: assets[0].alt,
-      imgTitle: "Trainer 1",
+      imgAlt: assets[1].alt,
+      imgTitle: "Trainer 2",
       bodyContent:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius consequatur rerum commodi neque perspiciatis accusantium distinctio voluptates autem consectetur tenetur rem officia odit pariatur, molestiae laboriosam natus consequuntur ullam accusamus.",
-      author: "Trainer 2",
+        "As someone who hated gyms and had zero discipline, I was skeptical at first. But the coaching style is so supportive and motivating that I actually look forward to every session now. My strength has doubled, I sleep better, and I've dropped two dress sizes. The nutrition guidance was a game-changer too. Highly recommend!",
+      author: "Marco Bianchi",
     },
     {
       imgPath: assets[2].path,
-      imgAlt: assets[0].alt,
-      imgTitle: "Trainer 1",
+      imgAlt: assets[2].alt,
+      imgTitle: "Trainer 3",
       bodyContent:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius consequatur rerum commodi neque perspiciatis accusantium distinctio voluptates autem consectetur tenetur rem officia odit pariatur, molestiae laboriosam natus consequuntur ullam accusamus.",
-      author: "Trainer 3",
+        "After having two kids I struggled to get back in shape and regain my confidence. This trainer helped me rebuild strength, improve my posture, and get back into my pre-pregnancy clothes. More importantly, he taught me sustainable habits instead of quick fixes. I'm stronger, more energetic, and feel like the best version of myself at 38!",
+      author: "Lucia Verdi",
     },
   ];
 

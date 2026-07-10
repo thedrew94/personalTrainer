@@ -1,0 +1,10 @@
+{
+  "welcome": "Bienvenido a nuestra app",
+  "greeting": "¡Hola, {{name}}!",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+  "trainer": {
+    "title": "Entrenador Personal",
+    "bookSession": "Reservar Sesión"
+  }
+}

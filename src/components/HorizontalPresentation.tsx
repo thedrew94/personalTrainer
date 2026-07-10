@@ -2,9 +2,10 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Fragment, useRef } from "react";
+import type { AssetInterface } from "../types/interfaces";
 
 interface Props {
-  assets: Array<{ path: string; alt: string }>;
+  assets: Array<AssetInterface>;
 }
 
 export default function HorizontalPresentation({ assets }: Props) {
@@ -16,17 +17,21 @@ export default function HorizontalPresentation({ assets }: Props) {
   const wrapperInRef = useRef<HTMLDivElement>(null);
   const maskRef = useRef<SVGRectElement>(null);
 
-  const imagesElements = assets.map((asset, idx) => (
-    <picture
-      key={idx}
-      ref={idx === 0 ? img1Ref : idx === 1 ? img2Ref : idx === 2 ? img3Ref : null}
-      draggable="false"
-      onDragStart={(e) => e.preventDefault()}
-      onContextMenu={(e) => e.preventDefault()}
-    >
-      <img src={asset.path} alt={asset.alt} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} loading="eager" />
-    </picture>
-  ));
+  const imagesElements = assets
+    .filter((asset) => asset.type === "image")
+    .map((asset, idx) => {
+      return (
+        <picture
+          key={idx}
+          ref={idx === 0 ? img1Ref : idx === 1 ? img2Ref : idx === 2 ? img3Ref : null}
+          draggable="false"
+          onDragStart={(e) => e.preventDefault()}
+          onContextMenu={(e) => e.preventDefault()}
+        >
+          <img src={asset.path} alt={asset.alt} draggable="false" onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} loading="eager" />
+        </picture>
+      );
+    });
 
   useGSAP(() => {
     if (!wrapperInRef.current || !wrapperOutRef.current || !maskRef.current || !imgsContainerRef.current) return;
