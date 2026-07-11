@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   appLoading: boolean;
@@ -7,12 +8,14 @@ interface Props {
 }
 
 export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
+  const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [displayedProgress, setDisplayedProgress] = useState<number>(1);
 
   function handleLanguageSelection({ lang }: { lang: string }) {
     if (!appLoading) return;
     i18n.changeLanguage(lang);
+    navigate(`/${lang}`, { replace: true });
     setAppLoading(false);
   }
 

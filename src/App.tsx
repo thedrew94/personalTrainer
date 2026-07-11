@@ -10,12 +10,14 @@ import trainerImg3 from "./assets/trainer3Compressed.jpg";
 import trainerImg from "./assets/trainerCompressed.jpg";
 import videoPoster from "./assets/videoPoster.png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import GlobalLoader from "./components/GlobalLoader";
 import Menu from "./components/Menu";
-import type { AssetInterface } from "./types/interfaces";
 import PhotoGallery from "./components/PhotoGallery";
+import type { AssetInterface } from "./types/interfaces";
 
+const supportedLanguages = ["en", "es", "it", "ja"];
 const assets: Array<AssetInterface> = [
   {
     type: "image",
@@ -45,7 +47,13 @@ const assets: Array<AssetInterface> = [
 ];
 
 export default function App() {
+  const navigate = useNavigate();
+  const { lang } = useParams<{ lang: string }>();
   const [appLoading, setAppLoading] = useState(true);
+
+  useEffect(() => {
+    if (!lang || !supportedLanguages.includes(lang)) navigate("/it", { replace: true });
+  }, [lang]);
 
   return (
     <>
