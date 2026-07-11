@@ -11,8 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Navigate to={"/it"} replace />} />
-      <Route path="/:lang" element={<App />} />
+      <Route path="/" element={<Navigate to={"/personalTrainer/it"} replace />} />
+      <Route path="/personalTrainer/:lang" element={<App />} />
       <Route path="*" element={<div>not found</div>} />
     </Routes>
   </BrowserRouter>,
