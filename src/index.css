@@ -348,6 +348,7 @@ img:not([src]) {
   left: 0;
   z-index: 3;
   width: 45%;
+  max-width: 500px;
   height: 100%;
   background: rgb(19, 18, 18, 0.65);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -1496,7 +1497,7 @@ img:not([src]) {
   }
 
   .hero_bg_video::after {
-    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0) 100%);
   }
 
   .hero_vertical {
@@ -1530,12 +1531,11 @@ img:not([src]) {
 
   .hero_info_text::before {
     top: 50%;
-    left: 0%;
+    left: -80%;
     width: 125%;
     height: 150%;
-    opacity: 0.35;
-    /* background-color: rgb(154, 40, 40); */
-    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    opacity: 1;
+    background: rgb(37, 37, 37, 0.5);
     transform: translateY(-50%);
   }
 

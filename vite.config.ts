@@ -10,7 +10,8 @@ export default defineConfig({
     open: true,
   },
 
-  base: "./",
+  // base: "/",
+  base: "/personalTrainer/",
 
   build: {
     outDir: "docs",
