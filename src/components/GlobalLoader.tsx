@@ -11,6 +11,7 @@ export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [displayedProgress, setDisplayedProgress] = useState<number>(1);
+  const [loaderDuration, setLoaderDuration] = useState<number | null>(null);
 
   function handleLanguageSelection({ lang }: { lang: string }) {
     if (!appLoading) return;
@@ -20,12 +21,12 @@ export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
   }
 
   useEffect(() => {
-    const duration = 3000;
+    if (!loaderDuration) return;
     const startTime = Date.now();
 
     function animate() {
       const elapsed = Date.now() - startTime;
-      const progress = Math.min(Math.floor((elapsed / duration) * 100), 100);
+      const progress = Math.min(Math.floor((elapsed / loaderDuration!) * 100), 100);
 
       setDisplayedProgress(Math.max(1, progress));
 
@@ -37,7 +38,22 @@ export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
     const rafId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(rafId);
-  }, [setAppLoading]);
+  }, [loaderDuration, setAppLoading]);
+
+  useEffect(() => {
+    // use the localStorage to store if user has already accessd this page in the past 30min, if yes change the loader duration from 3000 to 1000
+    const lastAccess = localStorage.getItem("lastAccess");
+
+    console.log("lastAccess", lastAccess);
+    const now = Date.now();
+    if (lastAccess && now - parseInt(lastAccess) < 30 * 60 * 1000) {
+      console.log("lastAccessexeeeeee", lastAccess);
+      setLoaderDuration(1000);
+    } else {
+      setLoaderDuration(3000);
+    }
+    localStorage.setItem("lastAccess", now.toString());
+  }, []);
 
   return (
     <div className={`intro_view ${!appLoading ? "fade_out" : ""}`}>
