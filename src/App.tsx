@@ -14,6 +14,7 @@ import { useState } from "react";
 import GlobalLoader from "./components/GlobalLoader";
 import Menu from "./components/Menu";
 import type { AssetInterface } from "./types/interfaces";
+import PhotoGallery from "./components/PhotoGallery";
 
 const assets: Array<AssetInterface> = [
   {
@@ -55,6 +56,7 @@ export default function App() {
           <Menu />
           <Hero assets={assets} />
           <HorizontalPresentation assets={assets} />
+          <PhotoGallery assets={assets} />
           <Testimonials assets={assets} />
           <Contacts />
           <Footer />

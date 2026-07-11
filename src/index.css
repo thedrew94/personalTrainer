@@ -380,6 +380,8 @@ img:not([src]) {
   white-space: nowrap;
   -webkit-text-stroke: 2px white;
   text-stroke: 2px white;
+  user-select: none;
+  pointer-events: none;
 }
 
 .hero_info {
@@ -714,6 +716,175 @@ img:not([src]) {
   height: 100vh;
 }
 
+.photo_gallery_modal {
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.photo_gallery_modal_content {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.photo_gallery_modal_content button {
+  position: absolute;
+  z-index: 1;
+  top: 8%;
+  left: 50%;
+  width: 300px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  background-color: #252525;
+  font-family: "CustomFont", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 30px rrgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transform: translate(-50%, -150%);
+  animation: enterViewFromTop 0.35s ease-out forwards;
+}
+
+.photo_gallery_modal_img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.photo_gallery_modal_img img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -o-object-fit: contain;
+  object-position: center;
+  -o-object-position: center;
+}
+
+.photo_gallery {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.photo_gallery_title {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  font-size: clamp(4rem, 10dvw, 10rem);
+  line-height: 1;
+  font-weight: bold;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  text-stroke: 2px #fff;
+  transform: translate(-50%, -50%);
+}
+
+.photo_gallery_img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  overflow: hidden;
+}
+
+.photo_gallery_img button {
+  position: absolute;
+  z-index: 1;
+  width: 180px;
+  max-width: 180px;
+  padding: 10px 0;
+  border: 1px solid #fff;
+  outline: none;
+  border-radius: 3px;
+  background: transparent;
+  background-color: #252525;
+  font-family: "CustomFont", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.photo_gallery_img.onfocus:nth-child(3) button,
+.photo_gallery_img.onfocus:nth-child(2) button {
+  top: 60px;
+  left: 50%;
+}
+
+.photo_gallery_img.onfocus:nth-child(4) button,
+.photo_gallery_img.onfocus:nth-child(5) button {
+  bottom: 60px;
+  left: 50%;
+}
+
+.photo_gallery_img.onfocus {
+  z-index: 2;
+  transform: scale(1.1);
+}
+
+.photo_gallery_img img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  filter: saturate(0.15) brightness(0.85) contrast(1.1);
+  object-fit: cover;
+  -o-object-fit: cover;
+  object-position: center;
+  -o-object-position: center;
+  transition: all 0.25s ease-out;
+}
+
+.photo_gallery_img.onfocus img {
+  filter: saturate(1) brightness(1) contrast(1);
+}
+
 .testimonials {
   position: relative;
   z-index: 1;
@@ -751,7 +922,7 @@ img:not([src]) {
   object-position: center;
   -o-object-position: center;
   filter: saturate(0.15) brightness(0.85) contrast(1.1);
-  filter: saturate(1) brightness(1) contrast(1);
+  /* filter: saturate(1) brightness(1) contrast(1); */
   user-select: none;
   pointer-events: none;
 }
@@ -1460,6 +1631,23 @@ img:not([src]) {
 
   .inner_section {
     height: 100vh;
+  }
+
+  .photo_gallery_img button {
+    width: 120px;
+    max-width: 120px;
+    padding: 10px 0;
+    font-size: 1.6rem;
+  }
+
+  .photo_gallery_img.onfocus:nth-child(3) button,
+  .photo_gallery_img.onfocus:nth-child(2) button {
+    top: 30px;
+  }
+
+  .photo_gallery_img.onfocus:nth-child(4) button,
+  .photo_gallery_img.onfocus:nth-child(5) button {
+    bottom: 30px;
   }
 
   .testimonials {
