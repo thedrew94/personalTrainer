@@ -10,7 +10,6 @@ export default defineConfig({
     open: true,
   },
 
-  // base: "/",
   base: "/personalTrainer/",
 
   build: {
