@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface Props {
   appLoading: boolean;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [displayedProgress, setDisplayedProgress] = useState<number>(1);
   const [loaderDuration, setLoaderDuration] = useState<number | null>(null);
@@ -16,7 +16,7 @@ export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
   function handleLanguageSelection({ lang }: { lang: string }) {
     if (!appLoading) return;
     i18n.changeLanguage(lang);
-    navigate(`/${lang}`, { replace: true });
+    // navigate(`/${lang}`, { replace: true });
     setAppLoading(false);
   }
 
@@ -43,8 +43,6 @@ export default function GlobalLoader({ appLoading, setAppLoading }: Props) {
   useEffect(() => {
     // use the localStorage to store if user has already accessd this page in the past 30min, if yes change the loader duration from 3000 to 1000
     const lastAccess = localStorage.getItem("lastAccess");
-
-    console.log("lastAccess", lastAccess);
     const now = Date.now();
     if (lastAccess && now - parseInt(lastAccess) < 30 * 60 * 1000) {
       console.log("lastAccessexeeeeee", lastAccess);

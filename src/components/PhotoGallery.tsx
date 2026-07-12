@@ -16,7 +16,10 @@ export default function PhotoGallery({ assets }: Props) {
       {openPhotoGalleryModal && <PhotoGalleryModal selectedImg={images[selectedImage]} setOpenPhotoGalleryModal={setOpenPhotoGalleryModal} />}
 
       <section className="photo_gallery">
-        <h2 className="photo_gallery_title">PHOTO GALLERY</h2>
+        <h2 className="photo_gallery_title">
+          PHOTO <br />
+          GALLERY
+        </h2>
 
         <picture
           draggable="false"
