@@ -11,7 +11,7 @@ export default defineConfig({
   },
 
   // base: "/personalTrainer/",
-  base: "./",
+  base: "/",
 
   build: {
     outDir: "docs",
