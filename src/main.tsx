@@ -13,9 +13,9 @@ createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
       {/* <Route path="/" element={<Navigate to={"/it"} replace />} /> */}
-      <Route path="/" element={<App />} />
+      <Route path="*" element={<App />} />
       {/* <Route path="/:lang" element={<App />} /> */}
-      <Route path="*" element={<div>not found</div>} />
+      {/* <Route path="*" element={<div>not found</div>} /> */}
     </Routes>
   </BrowserRouter>,
 );
